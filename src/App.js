@@ -23,7 +23,6 @@ class App extends React.Component {
 
     this.getUserName = this.getUserName.bind(this)
     this.getData = this.getData.bind(this)
-    this.userName = React.createRef()
 
     this.state = {
       username: null,
@@ -45,10 +44,10 @@ class App extends React.Component {
   getUserName(event) {
     event.preventDefault()
     let un = event.target.elements.username.value
-    this.setState({username: un})
+    this.setState({username: un}, function () {
+      this.getData(this.state.username)
+    })
 
-    this.getData(this.userName.current.value)
-        
     event.target.elements.username.value = ''
   }
 
@@ -57,7 +56,7 @@ class App extends React.Component {
       <div>
         <form onSubmit={this.getUserName}>
           <label>Username</label>
-          <input type="text" name="username"ref={this.userName} />
+          <input type="text" name="username" />
           <button type="submit">Submit</button>
         </form>
         <Info data={this.state.userData} />
