@@ -37,6 +37,9 @@ class App extends React.Component {
     .then(data => {
       this.setState({userData: data})
     })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   getUserName(event) {
